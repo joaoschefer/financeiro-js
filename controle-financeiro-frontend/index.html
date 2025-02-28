@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Controle Financeiro</h1>
+        <div id="saldo">
+            <h2>Saldo Atual: <span id="saldo-valor">R$ 0,00</span></h2>
+        </div>
+        <form id="form-transacao">
+            <input type="text" id="descricao" placeholder="Descrição" required>
+            <input type="text" id="valor" placeholder="Valor" required>
+            <select id="tipo">
+                <option value="entrada">Entrada</option>
+                <option value="gasto">Gasto</option>
+            </select>
+            <button type="submit">Adicionar</button>
+        </form>
+        <p id="mensagem" style="display: none; color: green;"></p>
+        <a href="transacoes.html">
+            <h1>Transações</h1>
+        </a>
+        <ul id="lista-transacoes"></ul>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

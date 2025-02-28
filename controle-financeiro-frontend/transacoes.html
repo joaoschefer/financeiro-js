@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle Financeiro</title>
+    <link rel="stylesheet" href="transacoes.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Controle Financeiro</h1>
+
+        <div class="saldo-container">
+            <h2>Saldo Atual: <span id="saldo-valor">R$ 0,00</span></h2>
+        </div>
+
+        <div class="transacoes-container">
+            <h2>Transações</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Descrição</th>
+                        <th>Fluxo</th>
+                        <th>Valor</th>
+                        <th>Data</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela-transacoes"></tbody>
+            </table>
+        </div>
+        <a href="index.html">
+            <h2>Home</h2>
+        </a>
+    </div>
+
+    <script src="transacoes.js"></script>
+</body>
+</html>
