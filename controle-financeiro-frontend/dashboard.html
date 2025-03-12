@@ -1,63 +1,89 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard Financeiro</title>
-    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="dashboard.css" />
     <script defer src="dashboard.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <!-- Header -->
     <header>
-        <h1>Dashboard Financeiro</h1>
+      <h1>Dashboard Financeiro</h1>
     </header>
-    
+
     <!-- Sidebar -->
     <div class="sidebar">
-        <ul>
-            <li><a href="#">📊 Dashboard</a></li>
-            <li><a href="#">📈 Investimentos</a></li>
-            <li><a href="#">💸 Despesas</a></li>
-            <li><a href="#">⚙ Configurações</a></li>
-        </ul>
+      <ul>
+        <li><a href="#">📊 Dashboard</a></li>
+        <li><a href="#">📈 Investimentos</a></li>
+        <li><a href="#">💸 Despesas</a></li>
+        <li><a href="#">⚙ Configurações</a></li>
+      </ul>
     </div>
-    
+
     <!-- Main Content -->
     <div class="main-content">
-        <div class="card">
-            <p>Saldo: R$ 10.000</p>
-            <p>Ganhos: R$ 20.000</p>
-            <p>Gastos: R$ 5.000</p>
-            <p>Investimentos: R$ 5.000</p>
-        </div>
+      <div class="card">
+        <p>Saldo: R$ 10.000</p>
+        <p>Ganhos: R$ 20.000</p>
+        <p>Gastos: R$ 5.000</p>
+        <p>Investimentos: R$ 5.000</p>
+      </div>
 
+      <!-- Botões para abrir os modais -->
+       <div class="container-btn">
         <button id="abrir-modal">Adicionar Transação</button>
-        <div id="modal" class="modal">
-            <div class="modal-content">
-                <span class="fechar-modal">&times;</span>
-                <h2>Nova Transação</h2>
-                <form id="form-transacao">
-                    <label for="descricao">Descrição:</label>
-                    <input type="text" id="descricao" required>
-        
-                    <label for="fluxo">Fluxo:</label>
-                    <select id="fluxo">
-                        <option value="entrada">Entrada</option>
-                        <option value="saida">Saída</option>
-                    </select>
-        
-                    <label for="valor">Valor:</label>
-                    <input type="number" id="valor" required>
-        
-                    <label for="data">Data:</label>
-                    <input type="date" id="data" required>
-        
-                    <button type="submit">Salvar</button>
-                </form>
-            </div>
+        <button id="abrir-modal-investimento">Adicionar Investimento</button>
+       </div>
+      
+
+      <!-- Modal de Transações -->
+      <div id="modal" class="modal">
+        <div class="modal-content">
+          <span class="fechar-modal">&times;</span>
+          <h2>Nova Transação</h2>
+          <form id="form-transacao">
+            <label for="descricao">Descrição:</label>
+            <input type="text" id="descricao" required />
+            <label for="fluxo">Fluxo:</label>
+            <select id="fluxo">
+              <option value="entrada">Entrada</option>
+              <option value="saida">Saída</option>
+            </select>
+            <label for="valor">Valor:</label>
+            <input type="number" id="valor" required />
+            <label for="data">Data:</label>
+            <input type="date" id="data" required />
+            <button type="submit">Salvar</button>
+          </form>
         </div>
-        
+      </div>
+
+      <!-- Modal de Investimentos -->
+      <div id="modal-investimento" class="modal">
+        <div class="modal-content">
+          <span class="fechar-modal-investimento">&times;</span>
+          <h2>Novo Investimento</h2>
+          <form id="form-investimento">
+            <label for="ativo">Ativo:</label>
+            <input type="text" id="ativo" required />
+            <label for="quantidade">Quantidade:</label>
+            <input type="number" id="quantidade" required />
+            <label for="valor-cota">Valor da Cota:</label>
+            <input type="number" id="valor-cota" step="0.01" required />
+            <label for="tipo-investimento">Tipo de Investimento:</label>
+            <select id="tipo-investimento">
+              <option value="acao">Ação</option>
+              <option value="fundo">Fundo Imobiliário</option>
+              <option value="cripto">Cripto</option>
+              <option value="outro">Outro</option>
+            </select>
+            <button type="submit">Adicionar</button>
+          </form>
+        </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>
