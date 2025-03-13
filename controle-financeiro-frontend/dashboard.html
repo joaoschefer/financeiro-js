@@ -26,29 +26,29 @@
     <!-- Main Content -->
     <div class="main-content">
       <div class="card">
-        <p>Saldo: R$ 10.000</p>
-        <p>Ganhos: R$ 20.000</p>
-        <p>Gastos: R$ 5.000</p>
-        <p>Investimentos: R$ 5.000</p>
+        <p id="saldo">Saldo: Carregando...</p>
+        <p id="ganhos">Ganhos: --</p>
+        <p id="gastos">Gastos: --</p>
+        <p id="total-investimentos">Investimentos: Carregando...</p>
       </div>
 
       <!-- Botões para abrir os modais -->
        <div class="container-btn">
-        <button id="abrir-modal">Adicionar Transação</button>
+        <button id="abrir-modal-transacao">Adicionar Transação</button>
         <button id="abrir-modal-investimento">Adicionar Investimento</button>
        </div>
       
 
       <!-- Modal de Transações -->
-      <div id="modal" class="modal">
+      <div id="modal-transacao" class="modal">
         <div class="modal-content">
-          <span class="fechar-modal">&times;</span>
+          <span class="fechar-modal-transacao">&times;</span>
           <h2>Nova Transação</h2>
           <form id="form-transacao">
             <label for="descricao">Descrição:</label>
             <input type="text" id="descricao" required />
-            <label for="fluxo">Fluxo:</label>
-            <select id="fluxo">
+            <label for="tipo">Tipo:</label>
+            <select id="tipo">
               <option value="entrada">Entrada</option>
               <option value="saida">Saída</option>
             </select>
