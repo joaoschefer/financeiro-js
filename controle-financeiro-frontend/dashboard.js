@@ -146,6 +146,28 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Chamar a função ao carregar a página
+    async function carregarSaldo(){
+        try {
+            const response = await fetch("http://localhost:3005/financeiro/saldo");
+            if (!response.ok) {
+                throw new Error(`Erro na API: ${response.status}`);
+            }
+
+            const data = await response.json();
+            const saldo = parseFloat(data.saldo).toFixed(2);
+            const ganhos = parseFloat(data.ganhos).toFixed(2);
+            const gastos = parseFloat(data.gastos).toFixed(2);
+
+            document.getElementById("saldo").innerText = `Saldo: R$ ${saldo}`;
+            document.getElementById("ganhos").innerText = `Ganhos: R$ ${ganhos}`;
+            document.getElementById("gastos").innerText = `Gastos: R$ ${gastos}`;
+        } catch (error) {
+            console.error("Erro ao carregar saldo:", error);
+        }
+    }
+
+    // Chamar as funções ao carregar a página
     carregarTotalInvestido();
+    carregarSaldo();
+
 });

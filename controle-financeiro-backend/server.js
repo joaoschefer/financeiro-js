@@ -62,6 +62,26 @@ app.get("/investimentos/total", async (req, res) => {
     }
 });
 
+// rota para saldo, ganhos e gastos
+app.get("/financeiro/saldo", async (req, res) => {
+    try {
+        const result = await pool.query(`
+            SELECT 
+                COALESCE(SUM(CASE WHEN tipo = 'entrada' THEN valor ELSE 0 END), 0) AS total_ganhos,
+                COALESCE(SUM(CASE WHEN tipo = 'saida' THEN valor ELSE 0 END), 0) AS total_gastos
+            FROM transacoes
+        `);
+
+        const ganhos = parseFloat(result.rows[0].total_ganhos);
+        const gastos = parseFloat(result.rows[0].total_gastos);
+        const saldo = ganhos - gastos;
+
+        res.json({ saldo: saldo.toFixed(2), ganhos: ganhos.toFixed(2), gastos: gastos.toFixed(2) });
+    } catch (error) {
+        console.error("Erro ao calcular saldo:", error);
+        res.status(500).json({ error: "Erro interno do servidor" });
+    }
+});
 
 // Iniciar servidor
 const PORT = process.env.PORT || 3005;
