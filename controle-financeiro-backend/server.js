@@ -8,7 +8,6 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// Configuração do PostgreSQL
 const pool = new Pool({
     user: process.env.DB_USER,
     host: process.env.DB_HOST,
@@ -109,7 +108,6 @@ app.get("/investimentos/ultimos", async (req, res) => {
     }
 });
 
-// Iniciar servidor
 const PORT = process.env.PORT || 3005;
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);

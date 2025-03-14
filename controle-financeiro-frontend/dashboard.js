@@ -1,45 +1,40 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Modal de Transações
+    // modal de transações
     const modalTransacao = document.getElementById("modal-transacao");
     const abrirModalTransacao = document.getElementById("abrir-modal-transacao");
     const fecharModalTransacao = document.querySelector(".fechar-modal-transacao");
     const formTransacao = document.getElementById("form-transacao");
 
-    // Modal de Investimentos
+    // modal de investimentos
     const modalInvestimento = document.getElementById("modal-investimento");
     const abrirModalInvestimento = document.getElementById("abrir-modal-investimento");
     const fecharModalInvestimento = document.querySelector(".fechar-modal-investimento");
     const formInvestimento = document.getElementById("form-investimento");
 
-    // Abrir modal de transações
     if (abrirModalTransacao && modalTransacao) {
         abrirModalTransacao.addEventListener("click", function () {
             modalTransacao.style.display = "flex";
         });
     }
 
-    // Fechar modal de transações
     if (fecharModalTransacao && modalTransacao) {
         fecharModalTransacao.addEventListener("click", function () {
             modalTransacao.style.display = "none";
         });
     }
 
-    // Abrir modal de investimentos
     if (abrirModalInvestimento && modalInvestimento) {
         abrirModalInvestimento.addEventListener("click", function () {
             modalInvestimento.style.display = "flex";
         });
     }
 
-    // Fechar modal de investimentos
     if (fecharModalInvestimento && modalInvestimento) {
         fecharModalInvestimento.addEventListener("click", function () {
             modalInvestimento.style.display = "none";
         });
     }
 
-    // Capturar e enviar dados do formulário de transações
     if (formTransacao) {
         formTransacao.addEventListener("submit", async function (event) {
             event.preventDefault();
@@ -78,7 +73,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Capturar e enviar dados do formulário de investimentos
     if (formInvestimento) {
         formInvestimento.addEventListener("submit", async function (event) {
             event.preventDefault();
@@ -109,7 +103,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     formInvestimento.reset();
                     modalInvestimento.style.display = "none";
 
-                    // Atualizar o total investido após adicionar um investimento
                     carregarTotalInvestido();
                 } else {
                     alert("Erro ao adicionar investimento");
@@ -120,7 +113,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Função para carregar o total investido
     async function carregarTotalInvestido() {
         try {
             const response = await fetch("http://localhost:3005/investimentos/total");
@@ -129,15 +121,15 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             const data = await response.json();
-            const totalInvestido = parseFloat(data.total).toFixed(2); // Converter para número e formatar
+            const totalInvestido = parseFloat(data.total).toFixed(2); 
 
-            console.log("Total investido recebido:", totalInvestido); // Debug no console
+            console.log("Total investido recebido:", totalInvestido); 
 
             const totalInvestimentosEl = document.getElementById("total-investimentos");
 
             if (totalInvestimentosEl) {
                 totalInvestimentosEl.innerText = `Investimentos: R$ ${totalInvestido}`;
-                console.log("Elemento atualizado com sucesso!"); // Debug
+                console.log("Elemento atualizado com sucesso!"); 
             } else {
                 console.error("Elemento #total-investimentos não encontrado no DOM.");
             }
@@ -176,7 +168,6 @@ document.addEventListener("DOMContentLoaded", function () {
             const transacoes = await response.json();
             const tabelaTransacoes = document.getElementById("tabela-transacoes");
     
-            // Limpar tabela antes de adicionar novos dados
             tabelaTransacoes.innerHTML = "";
     
             transacoes.forEach(transacao => {
@@ -222,7 +213,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Chamar as funções ao carregar a página
+    // chamar as funções ao carregar a página
     carregarTotalInvestido();
     carregarSaldo();
     carregarUltimasTransacoes();

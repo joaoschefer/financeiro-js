@@ -7,7 +7,6 @@
     font-family: "Montserrat", sans-serif;
 }
 
-/* Header fixo no topo */
 header {
     width: 100%;
     background: #2c3e50;
@@ -20,13 +19,11 @@ header {
     z-index: 1000;
 }
 
-/* Layout principal: Sidebar + Conteúdo */
 body {
     display: flex;
     flex-direction: row;
 }
 
-/* Sidebar fixa à esquerda */
 .sidebar {
     width: 250px;
     height: 100vh;
@@ -34,7 +31,7 @@ body {
     color: white;
     position: fixed;
     left: 0;
-    top: 60px; /* Para ficar abaixo do header */
+    top: 60px; 
     padding: 20px;
 }
 
@@ -58,11 +55,10 @@ body {
     background: #34495e;
 }
 
-/* Conteúdo principal */
 .main-content {
     flex: 1;
-    margin-left: 250px; /* Para não sobrepor a sidebar */
-    padding: 80px 20px 20px 20px; /* Top 80px para evitar sobreposição do header */
+    margin-left: 250px; 
+    padding: 80px 20px 20px 20px; 
 }
 
 .card {
@@ -84,9 +80,8 @@ body {
     height: 100px;
 }
 
-/* Estilizando os modais */
 .modal {
-    display: none; /* Garante que o modal começa fechado */
+    display: none; 
     position: fixed;
     z-index: 1000;
     left: 0;
@@ -99,25 +94,21 @@ body {
     padding: 20px;
 }
 
-
-/* Conteúdo do Modal */
 .modal-content {
     background: white;
     padding: 25px;
     border-radius: 10px;
     width: 100%;
-    max-width: 350px; /* Garantia de responsividade */
+    max-width: 350px; 
     text-align: center;
     position: relative;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Diferenciar visualmente os modais */
 #modal-investimento .modal-content {
-    background: #f8f9fa; /* Cor levemente diferente */
+    background: #f8f9fa; 
 }
 
-/* Botão de Fechar */
 .fechar-modal-transacao, .fechar-modal-investimento {
     position: absolute;
     top: 10px;
@@ -127,7 +118,6 @@ body {
     color: #333;
 }
 
-/* Estilizando inputs e selects */
 input, select {
     width: 100%;
     margin: 10px 0;
@@ -139,12 +129,11 @@ input, select {
 
 .container-btn {
     display: flex;
-    gap: 10px; /* Espaçamento entre os botões */
+    gap: 10px; 
 }
 
-/* Botões de Ação */
 button {
-    flex: 1; /* Faz os botões ocuparem o mesmo espaço */
+    flex: 1; 
     padding: 12px;
     border: none;
     border-radius: 5px;
@@ -157,7 +146,6 @@ button:hover {
     opacity: 0.8;
 }
 
-/* Estilização específica para botões de adicionar */
 #abrir-modal-transacao, #abrir-modal-investimento {
     background-color: #2ecc71;
     color: white;

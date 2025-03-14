@@ -7,7 +7,6 @@
     font-family: "Montserrat", sans-serif;
 }
 
-/* Header fixo no topo */
 header {
     width: 100%;
     background: #2c3e50;
@@ -20,13 +19,11 @@ header {
     z-index: 1000;
 }
 
-/* Layout principal: Sidebar + Conteúdo */
 body {
     display: flex;
     flex-direction: row;
 }
 
-/* Sidebar fixa à esquerda */
 .sidebar {
     width: 250px;
     height: 100vh;
@@ -34,7 +31,7 @@ body {
     color: white;
     position: fixed;
     left: 0;
-    top: 60px; /* Para ficar abaixo do header */
+    top: 60px;
     padding: 20px;
 }
 
@@ -58,9 +55,8 @@ body {
     background: #34495e;
 }
 
-/* Conteúdo principal */
 .main-content {
     flex: 1;
-    margin-left: 250px; /* Para não sobrepor a sidebar */
-    padding: 80px 20px 20px 20px; /* Top 80px para evitar sobreposição do header */
+    margin-left: 250px; 
+    padding: 80px 20px 20px 20px; 
 }
