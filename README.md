@@ -1,6 +1,6 @@
 # 📊 Dashboard Financeiro
 
-Este projeto foi desenvolvido para uso próprio e como um meio de estudo. Ele permite o cadastro de transações financeiras (gastos e ganhos) e investimentos, ajudando no controle financeiro pessoal.
+Este projeto está sendo desenvolvido para uso próprio e como um meio de estudo. Ele permite o cadastro de transações financeiras (gastos e ganhos) e investimentos, ajudando no controle financeiro pessoal.
 
 ## 🚀 Tecnologias Utilizadas
 
