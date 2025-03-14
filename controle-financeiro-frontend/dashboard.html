@@ -16,10 +16,11 @@
     <!-- Sidebar -->
     <div class="sidebar">
       <ul>
-        <li><a href="#">📊 Dashboard</a></li>
-        <li><a href="#">📈 Investimentos</a></li>
-        <li><a href="#">💸 Despesas</a></li>
-        <li><a href="#">⚙ Configurações</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="#">Despesas</a></li>
+        <li><a href="#">Investimentos BR</a></li>
+        <li><a href="euaecripto.html">EUA e Cripto</a></li>
+        <li><a href="#">Configurações</a></li>
       </ul>
     </div>
 
@@ -33,11 +34,43 @@
       </div>
 
       <!-- Botões para abrir os modais -->
-       <div class="container-btn">
+      <div class="container-btn">
         <button id="abrir-modal-transacao">Adicionar Transação</button>
         <button id="abrir-modal-investimento">Adicionar Investimento</button>
-       </div>
-      
+      </div>
+
+      <div class="tabelas-container">
+        <div class="tabela-wrapper">
+          <h2>Últimas Transações</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Descrição</th>
+                <th>Tipo</th>
+                <th>Valor</th>
+                <th>Data</th>
+              </tr>
+            </thead>
+            <tbody id="tabela-transacoes"></tbody>
+          </table>
+        </div>
+
+        <div class="tabela-wrapper">
+          <h2>Últimos Investimentos</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Ativo</th>
+                <th>Quantidade</th>
+                <th>Valor da Cota</th>
+                <th>Tipo</th>
+                <th>Data</th>
+              </tr>
+            </thead>
+            <tbody id="tabela-investimentos"></tbody>
+          </table>
+        </div>
+      </div>
 
       <!-- Modal de Transações -->
       <div id="modal-transacao" class="modal">
@@ -77,8 +110,6 @@
             <select id="tipo-investimento">
               <option value="acao">Ação</option>
               <option value="fundo">Fundo Imobiliário</option>
-              <option value="cripto">Cripto</option>
-              <option value="outro">Outro</option>
             </select>
             <button type="submit">Adicionar</button>
           </form>

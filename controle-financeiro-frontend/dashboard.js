@@ -166,8 +166,65 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    async function carregarUltimasTransacoes() {
+        try {
+            const response = await fetch("http://localhost:3005/transacoes/ultimas");
+            if (!response.ok) {
+                throw new Error(`Erro na API: ${response.status}`);
+            }
+    
+            const transacoes = await response.json();
+            const tabelaTransacoes = document.getElementById("tabela-transacoes");
+    
+            // Limpar tabela antes de adicionar novos dados
+            tabelaTransacoes.innerHTML = "";
+    
+            transacoes.forEach(transacao => {
+                const linha = document.createElement("tr");
+                linha.innerHTML = `
+                    <td>${transacao.descricao}</td>
+                    <td>${transacao.tipo === "entrada" ? "Entrada" : "Saída"}</td>
+                    <td>R$ ${parseFloat(transacao.valor).toFixed(2)}</td>
+                    <td>${new Date(transacao.data).toLocaleDateString("pt-BR")}</td>
+                `;
+                tabelaTransacoes.appendChild(linha);
+            });
+        } catch (error) {
+            console.error("Erro ao carregar últimas transações:", error);
+        }
+    }
+
+    async function carregarUltimosInvestimentos(){
+        try {
+            const response = await fetch("http://localhost:3005/investimentos/ultimos");
+            if (!response.ok) {
+                throw new Error(`Erro na API: ${response.status}`);
+            }
+
+            const investimentos = await response.json();
+            const tabelaInvestimentos = document.getElementById("tabela-investimentos");
+
+            tabelaInvestimentos.innerHTML = "";
+
+            investimentos.forEach(investimento => {
+                const linha = document.createElement("tr");
+                linha.innerHTML = `
+                    <td>${investimento.ativo}</td>
+                    <td>${investimento.quantidade}</td>
+                    <td>R$ ${parseFloat(investimento.valor_cota).toFixed(2)}</td>
+                    <td>${investimento.tipo_investimento === "acao" ? "Ação" : "Fundo Imobiliário"}</td>
+                    <td>${new Date(investimento.data_investimento).toLocaleDateString("pt-BR")}</td>
+                `;
+                tabelaInvestimentos.appendChild(linha);
+            });
+        } catch (error) {
+            console.error("Erro ao carregar últimos investimentos:", error);
+        }
+    }
+
     // Chamar as funções ao carregar a página
     carregarTotalInvestido();
     carregarSaldo();
-
+    carregarUltimasTransacoes();
+    carregarUltimosInvestimentos();
 });

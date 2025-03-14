@@ -83,6 +83,32 @@ app.get("/financeiro/saldo", async (req, res) => {
     }
 });
 
+// rota para obter as 5 ultimas transacoes
+app.get("/transacoes/ultimas", async (req, res) => {
+    try {
+        const result = await pool.query(
+            "SELECT descricao, tipo, valor, data FROM transacoes ORDER BY data DESC LIMIT 5"
+        );
+        res.json(result.rows);
+    } catch (error) {
+        console.error("Erro ao buscar as últimas transações:", error);
+        res.status(500).json({ error: "Erroi interno do servidor" });
+    }
+});
+
+// rota para obter os ultimos 5 investimentos
+app.get("/investimentos/ultimos", async (req, res) => {
+    try {
+        const result = await pool.query(
+            "SELECT ativo, quantidade, valor_cota, tipo_investimento, data_investimento FROM investimentos ORDER BY data_investimento DESC LIMIT 5"
+        );
+        res.json(result.rows);
+    } catch (error) {
+        console.error("Erro ao buscar últimos investimentos:", error);
+        res.status(500).json({ error: "Erro interno do servidor" });
+    }
+});
+
 // Iniciar servidor
 const PORT = process.env.PORT || 3005;
 app.listen(PORT, () => {
