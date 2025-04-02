@@ -108,6 +108,36 @@ app.get("/investimentos/ultimos", async (req, res) => {
     }
 });
 
+// rota para pegar todas as transacoes
+app.get("/transacoes", async (req, res) => {
+    try {
+        const result = await pool.query(
+            "SELECT descricao, tipo, valor, data FROM transacoes ORDER BY data DESC"
+        );
+        res.json(result.rows);
+    } catch (error) {
+        console.error("Erro ao buscar todas as transações:", error);
+        res.status(500).json({ error: "Erro interno do servidor" });
+    }
+});
+
+// calcular total investido
+app.get("/investimentos/total", async (req, res) => {
+    try {
+        const result = await pool.query(
+            "SELECT COALESCE(SUM(quantidade * valor_cota), 0) AS total_investido FROM investimentos"
+        );
+
+        const total = parseFloat(result.rows[0].total_investido).toFixed(2); // Converter para número
+
+        res.json({ total });
+    } catch (error) {
+        console.error("Erro ao calcular total investido:", error);
+        res.status(500).json({ error: "Erro interno do servidor" });
+    }
+});
+
+
 const PORT = process.env.PORT || 3005;
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
