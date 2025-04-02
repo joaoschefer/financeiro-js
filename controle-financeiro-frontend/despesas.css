@@ -60,3 +60,67 @@ body {
     margin-left: 250px; 
     padding: 80px 20px 20px 20px; 
 }
+
+/* Tabela Geral */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Cabeçalho da Tabela */
+th {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    text-align: left;
+    font-size: 16px;
+}
+
+/* Corpo da Tabela */
+td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+}
+
+/* Linha Alternada */
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Hover nas Linhas */
+tr:hover {
+    background-color: #ddd;
+}
+
+/* Ajuste para a Tabela quando em telas pequenas */
+@media (max-width: 768px) {
+    table {
+        font-size: 12px;
+    }
+
+    th, td {
+        padding: 8px;
+    }
+}
+
+/* Estilo de Container da Tabela */
+.tabelas-container {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Título da Tabela */
+.tabela-wrapper h2 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+

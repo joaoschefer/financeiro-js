@@ -94,3 +94,33 @@ header {
     height: 100px;
   }
   
+  /* Estilos para a tabela */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-family: Arial, sans-serif;
+}
+
+th {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px;
+  text-align: left;
+  font-size: 16px;
+}
+
+td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #ddd;
+}

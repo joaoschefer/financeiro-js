@@ -1,50 +1,52 @@
-// Gráfico de Pizza – Distribuição por Tipo de Ativo
-const ctx = document.getElementById('graficoPizza').getContext('2d');
-new Chart(ctx, {
-  type: 'pie',
-  data: {
-    labels: ['Ações', 'FIIs', 'Tesouro Direto'],
-    datasets: [{
-      data: [45, 35, 20],
-      backgroundColor: ['#007bff', '#28a745', '#ffc107'],
-    }]
-  },
-  options: {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'bottom'
-      }
-    }
-  }
-});
+document.addEventListener("DOMContentLoaded", function () {
+  // Carregar o total investido
+  async function carregarTotalInvestido() {
+      try {
+          const response = await fetch("http://localhost:3005/investimentos/total");
+          if (!response.ok) {
+              throw new Error(`Erro na API: ${response.status}`);
+          }
 
-// Gráfico de Linha – Evolução da Carteira
-const ctxLinha = document.getElementById('graficoLinha').getContext('2d');
-new Chart(ctxLinha, {
-  type: 'line',
-  data: {
-    labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
-    datasets: [{
-      label: 'Valor da Carteira (R$)',
-      data: [1000, 1200, 1350, 1500, 1700, 1850],
-      borderColor: '#007bff',
-      backgroundColor: 'rgba(0, 123, 255, 0.2)',
-      fill: true,
-      tension: 0.3
-    }]
-  },
-  options: {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'top'
+          const data = await response.json();
+          const totalInvestido = parseFloat(data.total).toFixed(2);
+
+          document.getElementById("total-investido").innerText = `Total Investido: R$ ${totalInvestido}`;
+      } catch (error) {
+          console.error("Erro ao carregar total investido:", error);
       }
-    },
-    scales: {
-      y: {
-        beginAtZero: false
-      }
-    }
   }
+
+  // Carregar todos os investimentos
+  async function carregarTodosInvestimentos() {
+      try {
+          const response = await fetch("http://localhost:3005/investimentos/ultimos");
+          if (!response.ok) {
+              throw new Error(`Erro na API: ${response.status}`);
+          }
+
+          const investimentos = await response.json();
+          const tabelaInvestimentos = document.getElementById("tabela-investimentos");
+
+          tabelaInvestimentos.innerHTML = "";
+
+          investimentos.forEach(investimento => {
+              const linha = document.createElement("tr");
+              linha.innerHTML = `
+                  <td>${investimento.ativo}</td>
+                  <td>${investimento.quantidade}</td>
+                  <td>R$ ${parseFloat(investimento.valor_cota).toFixed(2)}</td>
+                  <td>${investimento.tipo_investimento === "acao" ? "Ação" : "Fundo Imobiliário"}</td>
+                  <td>${new Date(investimento.data_investimento).toLocaleDateString("pt-BR")}</td>
+              `;
+              tabelaInvestimentos.appendChild(linha);
+          });
+      } catch (error) {
+          console.error("Erro ao carregar investimentos:", error);
+      }
+
+  }
+
+  // Chamar as funções ao carregar a página
+  carregarTotalInvestido();
+  carregarTodosInvestimentos();
 });

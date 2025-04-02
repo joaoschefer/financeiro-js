@@ -27,12 +27,29 @@
   <div class="main-content">
 
     <div class="card">
-        <p>Total Investido: R$ 1076,94</p>
+        <p id="total-investido">Total Investido: carregando...</p>
         <p>Rentabilidade Total: +12,5%</p>
         <p>Rentabilidade Mensal: +2,3%</p>
         <p>Lucro/Prejuízo Acumulado: R$ 154,00</p>
       </div>      
-      
+
+    <div class="tabelas-container">
+        <h2>Todos os Investimentos</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Ativo</th>
+              <th>Quantidade</th>
+              <th>Valor da Cota</th>
+              <th>Tipo</th>
+              <th>Data</th>
+            </tr>
+          </thead>
+          <tbody id="tabela-investimentos">
+            <!-- Os investimentos serão inseridos aqui -->
+          </tbody>
+        </table>
+    </div>
   </div>
 
 </body>
