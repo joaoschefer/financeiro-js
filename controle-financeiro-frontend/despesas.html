@@ -6,6 +6,7 @@
     <title>Dashboard Financeiro</title>
     <link rel="stylesheet" href="despesas.css"/>
     <script defer src="despesas.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
@@ -39,6 +40,18 @@
               <tbody id="tabela-transacoes"></tbody>
             </table>
           </div>
+          <div class="graficos-container">
+            <div class="grafico-box">
+              <h3>Distribuição de Entradas e Saídas</h3>
+              <canvas id="graficoPizza" ></canvas>
+            </div>
+            <div class="grafico-box">
+              <h3>Entradas vs Saídas por Mês</h3>
+              <canvas id="graficoBarras"></canvas>
+            </div>
+          </div>
+          
+
         </div>
       </div>
     
