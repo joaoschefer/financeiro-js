@@ -96,15 +96,17 @@ tr:hover {
     background-color: #ddd;
 }
 
-/* Ajuste para a Tabela quando em telas pequenas */
-@media (max-width: 768px) {
-    table {
-        font-size: 12px;
-    }
+.btn-excluir {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
 
-    th, td {
-        padding: 8px;
-    }
+.btn-excluir:hover {
+    background-color: #c0392b;
 }
 
 /* Estilo de Container da Tabela */

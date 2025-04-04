@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const totalInvestimentosEl = document.getElementById("total-investimentos");
 
             if (totalInvestimentosEl) {
-                totalInvestimentosEl.innerText = `Investimentos: R$ ${totalInvestido}`;
+                totalInvestimentosEl.innerText = `R$ ${totalInvestido}`;
                 console.log("Elemento atualizado com sucesso!"); 
             } else {
                 console.error("Elemento #total-investimentos não encontrado no DOM.");
@@ -150,9 +150,9 @@ document.addEventListener("DOMContentLoaded", function () {
             const ganhos = parseFloat(data.ganhos).toFixed(2);
             const gastos = parseFloat(data.gastos).toFixed(2);
 
-            document.getElementById("saldo").innerText = `Saldo: R$ ${saldo}`;
-            document.getElementById("ganhos").innerText = `Ganhos: R$ ${ganhos}`;
-            document.getElementById("gastos").innerText = `Gastos: R$ ${gastos}`;
+            document.getElementById("saldo").innerText = `R$ ${saldo}`;
+            document.getElementById("ganhos").innerText = `R$ ${ganhos}`;
+            document.getElementById("gastos").innerText = `R$ ${gastos}`;
         } catch (error) {
             console.error("Erro ao carregar saldo:", error);
         }

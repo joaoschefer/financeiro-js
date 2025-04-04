@@ -18,17 +18,42 @@ document.addEventListener("DOMContentLoaded", function() {
                     <td>${transacao.tipo === "entrada" ? "Entrada" : "Saída"}</td>
                     <td>R$ ${parseFloat(transacao.valor).toFixed(2)}</td>
                     <td>${new Date(transacao.data).toLocaleDateString("pt-BR")}</td>
+                    <td><button class="btn-excluir" data-id="${transacao.id}">Excluir</button></td>
                 `;
                 tabelaTransacoes.appendChild(linha);
             });
 
-            // ✅ Chamada correta com os dados
+            adicionarEventosExclusao();
             gerarGraficoPizza(transacoes);
             gerarGraficoBarras(transacoes);
 
         } catch (error) {
             console.error("Erro ao carregar transações:", error);
         }
+    }
+
+    function adicionarEventosExclusao() {
+        document.querySelectorAll(".btn-excluir").forEach(botao => {
+            botao.addEventListener("click", async function () {
+                const id = this.getAttribute("data-id");
+                const confirmar = confirm("Tem certeza que deseja excluir esta transação?");
+                if (!confirmar) return;
+
+                try {
+                    const resposta = await fetch(`http://localhost:3005/transacoes/${id}`, {
+                        method: "DELETE"
+                    });
+
+                    if (resposta.ok) {
+                        carregarTodasTransacoes(); // Recarrega a tabela
+                    } else {
+                        alert("Erro ao excluir transação.");
+                    }
+                } catch (erro) {
+                    console.error("Erro ao excluir transação:", erro);
+                }
+            });
+        });
     }
 
     async function gerarGraficoPizza(transacoes) {
@@ -111,6 +136,6 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // Chamada única
+    // Inicia carregamento
     carregarTodasTransacoes();
 });

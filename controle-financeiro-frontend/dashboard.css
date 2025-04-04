@@ -67,17 +67,34 @@ body {
     padding: 20px;
     background-color: white;
     border-radius: 10px;
+    gap: 10px;
 }
 
 .card p {
     background-color: #34495e;
     color: white;
+    font-size: 18px;
+    font-weight: bold;
     padding: 15px;
     margin: 5px;
     border-radius: 5px;
     flex: 1;
     text-align: center;
     height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card .titulo {
+    font-size: 16px;
+    opacity: 0.8;
+}
+
+.card .valor {
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 5px;
 }
 
 .modal {

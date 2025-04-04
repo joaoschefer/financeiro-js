@@ -112,7 +112,7 @@ app.get("/investimentos/ultimos", async (req, res) => {
 app.get("/transacoes", async (req, res) => {
     try {
         const result = await pool.query(
-            "SELECT descricao, tipo, valor, data FROM transacoes ORDER BY data DESC"
+            "SELECT id, descricao, tipo, valor, data FROM transacoes ORDER BY data DESC"
         );
         res.json(result.rows);
     } catch (error) {
@@ -141,3 +141,22 @@ const PORT = process.env.PORT || 3005;
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
 });
+
+app.delete('/transacoes/:id', async (req, res) => {
+    const id = req.params.id;
+
+    try {
+        const result = await pool.query('DELETE FROM transacoes WHERE id = $1', [id]);
+
+        if (result.rowCount === 0) {
+            return res.status(404).json({ mensagem: 'Transação não encontrada' });
+        }
+
+        res.status(200).json({ mensagem: 'Transação excluída com sucesso' });
+    } catch (error) {
+        console.error("Erro ao excluir transação:", error);
+        res.status(500).json({ erro: 'Erro interno do servidor' });
+    }
+});
+
+
