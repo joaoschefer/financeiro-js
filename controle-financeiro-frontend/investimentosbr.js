@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
           const data = await response.json();
           const totalInvestido = parseFloat(data.total).toFixed(2);
 
-          document.getElementById("total-investido").innerText = `Total Investido: R$ ${totalInvestido}`;
+          document.getElementById("total-investido").innerText = `R$ ${totalInvestido}`;
       } catch (error) {
           console.error("Erro ao carregar total investido:", error);
       }
