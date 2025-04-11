@@ -1,4 +1,15 @@
 document.addEventListener("DOMContentLoaded", function () {
+
+    const links = document.querySelectorAll('.sidebar ul li a');
+    const currentPage = window.location.pathname.split('/').pop(); 
+
+    links.forEach(link => {
+        const linkPage = link.getAttribute('href');
+        if (linkPage === currentPage) {
+            link.parentElement.classList.add('active');
+        }
+    });
+
     // modal de transações
     const modalTransacao = document.getElementById("modal-transacao");
     const abrirModalTransacao = document.getElementById("abrir-modal-transacao");
@@ -219,3 +230,4 @@ document.addEventListener("DOMContentLoaded", function () {
     carregarUltimasTransacoes();
     carregarUltimosInvestimentos();
 });
+

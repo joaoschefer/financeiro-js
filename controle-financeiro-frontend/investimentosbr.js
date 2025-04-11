@@ -1,4 +1,15 @@
 document.addEventListener("DOMContentLoaded", function () {
+
+    const links = document.querySelectorAll('.sidebar ul li a');
+    const currentPage = window.location.pathname.split('/').pop(); 
+
+    links.forEach(link => {
+        const linkPage = link.getAttribute('href');
+        if (linkPage === currentPage) {
+            link.parentElement.classList.add('active');
+        }
+    });
+
   // Carregar o total investido
   async function carregarTotalInvestido() {
       try {

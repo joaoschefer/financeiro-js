@@ -9,7 +9,7 @@
 
 header {
     width: 100%;
-    background: #2c3e50;
+    background: #001327;
     color: white;
     text-align: center;
     padding: 15px;
@@ -22,12 +22,13 @@ header {
 body {
     display: flex;
     flex-direction: row;
+    background-color: #BDB3A0;
 }
 
 .sidebar {
     width: 250px;
     height: 100vh;
-    background: #2c3e50;
+    background: #001327;
     color: white;
     position: fixed;
     left: 0;
@@ -55,13 +56,17 @@ body {
     background: #34495e;
 }
 
+.sidebar ul li.active {
+    background: #FE5516;
+    font-weight: bold;
+}
+
 .main-content {
     flex: 1;
     margin-left: 250px; 
     padding: 80px 20px 20px 20px; 
 }
 
-/* Tabela Geral */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -69,16 +74,14 @@ table {
     font-family: Arial, sans-serif;
 }
 
-/* Cabeçalho da Tabela */
 th {
-    background-color: #4CAF50;
+    background-color: #001327;
     color: white;
     padding: 10px;
     text-align: left;
     font-size: 16px;
 }
 
-/* Corpo da Tabela */
 td {
     padding: 10px;
     text-align: left;
@@ -86,12 +89,10 @@ td {
     font-size: 14px;
 }
 
-/* Linha Alternada */
 tr:nth-child(even) {
     background-color: #f2f2f2;
 }
 
-/* Hover nas Linhas */
 tr:hover {
     background-color: #ddd;
 }
@@ -109,7 +110,6 @@ tr:hover {
     background-color: #c0392b;
 }
 
-/* Estilo de Container da Tabela */
 .tabelas-container {
     margin-top: 30px;
     padding: 20px;
@@ -118,7 +118,14 @@ tr:hover {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Título da Tabela */
+
+.tabela-wrapper {
+    background-color: #ffffff; 
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 .tabela-wrapper h2 {
     font-size: 20px;
     color: #333;
