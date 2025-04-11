@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
-
     const links = document.querySelectorAll('.sidebar ul li a');
-    const currentPage = window.location.pathname.split('/').pop(); 
+    const currentPage = window.location.pathname.split('/').pop();
 
     links.forEach(link => {
         const linkPage = link.getAttribute('href');
@@ -10,64 +9,58 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // modal de transações
+    // Botões de troca de tabela
+    const botoesTabela = document.querySelectorAll('.tabela-btn');
+    const tabelas = document.querySelectorAll('.tabela-wrapper');
+
+    botoesTabela.forEach(botao => {
+        botao.addEventListener('click', () => {
+            botoesTabela.forEach(b => b.classList.remove('active'));
+            botao.classList.add('active');
+
+            const alvo = botao.getAttribute('data-target');
+            tabelas.forEach(tabela => {
+                if (tabela.id === alvo) {
+                    tabela.classList.remove('hidden');
+                } else {
+                    tabela.classList.add('hidden');
+                }
+            });
+        });
+    });
+
+    // Modal Transação
     const modalTransacao = document.getElementById("modal-transacao");
     const abrirModalTransacao = document.getElementById("abrir-modal-transacao");
     const fecharModalTransacao = document.querySelector(".fechar-modal-transacao");
     const formTransacao = document.getElementById("form-transacao");
 
-    // modal de investimentos
-    const modalInvestimento = document.getElementById("modal-investimento");
-    const abrirModalInvestimento = document.getElementById("abrir-modal-investimento");
-    const fecharModalInvestimento = document.querySelector(".fechar-modal-investimento");
-    const formInvestimento = document.getElementById("form-investimento");
-
     if (abrirModalTransacao && modalTransacao) {
-        abrirModalTransacao.addEventListener("click", function () {
+        abrirModalTransacao.addEventListener("click", () => {
             modalTransacao.style.display = "flex";
         });
     }
 
     if (fecharModalTransacao && modalTransacao) {
-        fecharModalTransacao.addEventListener("click", function () {
+        fecharModalTransacao.addEventListener("click", () => {
             modalTransacao.style.display = "none";
-        });
-    }
-
-    if (abrirModalInvestimento && modalInvestimento) {
-        abrirModalInvestimento.addEventListener("click", function () {
-            modalInvestimento.style.display = "flex";
-        });
-    }
-
-    if (fecharModalInvestimento && modalInvestimento) {
-        fecharModalInvestimento.addEventListener("click", function () {
-            modalInvestimento.style.display = "none";
         });
     }
 
     if (formTransacao) {
         formTransacao.addEventListener("submit", async function (event) {
             event.preventDefault();
-
             const descricao = document.getElementById("descricao").value;
             const tipo = document.getElementById("tipo").value;
             const valor = parseFloat(document.getElementById("valor").value);
             const data = document.getElementById("data").value;
 
-            const novaTransacao = {
-                descricao,
-                tipo,
-                valor,
-                data,
-            };
+            const novaTransacao = { descricao, tipo, valor, data };
 
             try {
                 const response = await fetch("http://localhost:3005/transacoes", {
                     method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
+                    headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(novaTransacao),
                 });
 
@@ -75,6 +68,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     alert("Transação adicionada com sucesso!");
                     formTransacao.reset();
                     modalTransacao.style.display = "none";
+                    carregarUltimasTransacoes();
+                    carregarSaldo();
                 } else {
                     alert("Erro ao adicionar transação");
                 }
@@ -84,28 +79,38 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // Modal Investimento
+    const modalInvestimento = document.getElementById("modal-investimento");
+    const abrirModalInvestimento = document.getElementById("abrir-modal-investimento");
+    const fecharModalInvestimento = document.querySelector(".fechar-modal-investimento");
+    const formInvestimento = document.getElementById("form-investimento");
+
+    if (abrirModalInvestimento && modalInvestimento) {
+        abrirModalInvestimento.addEventListener("click", () => {
+            modalInvestimento.style.display = "flex";
+        });
+    }
+
+    if (fecharModalInvestimento && modalInvestimento) {
+        fecharModalInvestimento.addEventListener("click", () => {
+            modalInvestimento.style.display = "none";
+        });
+    }
+
     if (formInvestimento) {
         formInvestimento.addEventListener("submit", async function (event) {
             event.preventDefault();
-
             const ativo = document.getElementById("ativo").value;
             const quantidade = parseFloat(document.getElementById("quantidade").value);
             const valor_cota = parseFloat(document.getElementById("valor-cota").value);
             const tipo_investimento = document.getElementById("tipo-investimento").value;
 
-            const novoInvestimento = {
-                ativo,
-                quantidade,
-                valor_cota,
-                tipo_investimento,
-            };
+            const novoInvestimento = { ativo, quantidade, valor_cota, tipo_investimento };
 
             try {
                 const response = await fetch("http://localhost:3005/investimentos", {
                     method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
+                    headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(novoInvestimento),
                 });
 
@@ -113,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     alert("Investimento adicionado com sucesso!");
                     formInvestimento.reset();
                     modalInvestimento.style.display = "none";
-
+                    carregarUltimosInvestimentos();
                     carregarTotalInvestido();
                 } else {
                     alert("Erro ao adicionar investimento");
@@ -127,43 +132,22 @@ document.addEventListener("DOMContentLoaded", function () {
     async function carregarTotalInvestido() {
         try {
             const response = await fetch("http://localhost:3005/investimentos/total");
-            if (!response.ok) {
-                throw new Error(`Erro na API: ${response.status}`);
-            }
-
             const data = await response.json();
-            const totalInvestido = parseFloat(data.total).toFixed(2); 
-
-            console.log("Total investido recebido:", totalInvestido); 
-
-            const totalInvestimentosEl = document.getElementById("total-investimentos");
-
-            if (totalInvestimentosEl) {
-                totalInvestimentosEl.innerText = `R$ ${totalInvestido}`;
-                console.log("Elemento atualizado com sucesso!"); 
-            } else {
-                console.error("Elemento #total-investimentos não encontrado no DOM.");
-            }
+            const totalInvestido = parseFloat(data.total).toFixed(2);
+            const totalEl = document.getElementById("total-investimentos");
+            if (totalEl) totalEl.innerText = `R$ ${totalInvestido}`;
         } catch (error) {
             console.error("Erro ao carregar total investido:", error);
         }
     }
 
-    async function carregarSaldo(){
+    async function carregarSaldo() {
         try {
             const response = await fetch("http://localhost:3005/financeiro/saldo");
-            if (!response.ok) {
-                throw new Error(`Erro na API: ${response.status}`);
-            }
-
             const data = await response.json();
-            const saldo = parseFloat(data.saldo).toFixed(2);
-            const ganhos = parseFloat(data.ganhos).toFixed(2);
-            const gastos = parseFloat(data.gastos).toFixed(2);
-
-            document.getElementById("saldo").innerText = `R$ ${saldo}`;
-            document.getElementById("ganhos").innerText = `R$ ${ganhos}`;
-            document.getElementById("gastos").innerText = `R$ ${gastos}`;
+            document.getElementById("saldo").innerText = `R$ ${parseFloat(data.saldo).toFixed(2)}`;
+            document.getElementById("ganhos").innerText = `R$ ${parseFloat(data.ganhos).toFixed(2)}`;
+            document.getElementById("gastos").innerText = `R$ ${parseFloat(data.gastos).toFixed(2)}`;
         } catch (error) {
             console.error("Erro ao carregar saldo:", error);
         }
@@ -172,15 +156,9 @@ document.addEventListener("DOMContentLoaded", function () {
     async function carregarUltimasTransacoes() {
         try {
             const response = await fetch("http://localhost:3005/transacoes/ultimas");
-            if (!response.ok) {
-                throw new Error(`Erro na API: ${response.status}`);
-            }
-    
             const transacoes = await response.json();
-            const tabelaTransacoes = document.getElementById("tabela-transacoes");
-    
-            tabelaTransacoes.innerHTML = "";
-    
+            const tabela = document.getElementById("tabela-transacoes");
+            tabela.innerHTML = "";
             transacoes.forEach(transacao => {
                 const linha = document.createElement("tr");
                 linha.innerHTML = `
@@ -189,45 +167,38 @@ document.addEventListener("DOMContentLoaded", function () {
                     <td>R$ ${parseFloat(transacao.valor).toFixed(2)}</td>
                     <td>${new Date(transacao.data).toLocaleDateString("pt-BR")}</td>
                 `;
-                tabelaTransacoes.appendChild(linha);
+                tabela.appendChild(linha);
             });
         } catch (error) {
-            console.error("Erro ao carregar últimas transações:", error);
+            console.error("Erro ao carregar transações:", error);
         }
     }
 
-    async function carregarUltimosInvestimentos(){
+    async function carregarUltimosInvestimentos() {
         try {
             const response = await fetch("http://localhost:3005/investimentos/ultimos");
-            if (!response.ok) {
-                throw new Error(`Erro na API: ${response.status}`);
-            }
-
             const investimentos = await response.json();
-            const tabelaInvestimentos = document.getElementById("tabela-investimentos");
-
-            tabelaInvestimentos.innerHTML = "";
-
-            investimentos.forEach(investimento => {
+            const tabela = document.getElementById("tabela-investimentos");
+            tabela.innerHTML = "";
+            investimentos.forEach(inv => {
                 const linha = document.createElement("tr");
                 linha.innerHTML = `
-                    <td>${investimento.ativo}</td>
-                    <td>${investimento.quantidade}</td>
-                    <td>R$ ${parseFloat(investimento.valor_cota).toFixed(2)}</td>
-                    <td>${investimento.tipo_investimento === "acao" ? "Ação" : "Fundo Imobiliário"}</td>
-                    <td>${new Date(investimento.data_investimento).toLocaleDateString("pt-BR")}</td>
+                    <td>${inv.ativo}</td>
+                    <td>${inv.quantidade}</td>
+                    <td>R$ ${parseFloat(inv.valor_cota).toFixed(2)}</td>
+                    <td>${inv.tipo_investimento === "acao" ? "Ação" : "Fundo Imobiliário"}</td>
+                    <td>${new Date(inv.data_investimento).toLocaleDateString("pt-BR")}</td>
                 `;
-                tabelaInvestimentos.appendChild(linha);
+                tabela.appendChild(linha);
             });
         } catch (error) {
-            console.error("Erro ao carregar últimos investimentos:", error);
+            console.error("Erro ao carregar investimentos:", error);
         }
     }
 
-    // chamar as funções ao carregar a página
+    // Iniciar carregamento
     carregarTotalInvestido();
     carregarSaldo();
     carregarUltimasTransacoes();
     carregarUltimosInvestimentos();
 });
-
